@@ -11,6 +11,8 @@ $(document).ready(function(){
     index -= 1;
   }
 
+  //Populate side list with followed users
+
   //Click handlers for buttons
   //Mouse Hover handlers for buttons
   //Add more tweets handler (constant update prefered)
