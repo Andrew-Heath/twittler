@@ -10,4 +10,8 @@ $(document).ready(function(){
     $tweet.appendTo($tweetFrame);
     index -= 1;
   }
+
+  //Click handlers for buttons
+  //Mouse Hover handlers for buttons
+  //Add more tweets handler (constant update prefered)
 });
