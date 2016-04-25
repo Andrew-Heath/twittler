@@ -26,11 +26,15 @@ $(document).ready(function(){
   }
 
   setInterval(function() {
-    if(streams.home.length > index) {
+    while(index < streams.home.length) {
+    postTweet(index);
+    index++;
+    }
+    /*if(streams.home.length > index) {
       postTweet(index);
       index++;
-    }
-  }, 500);
+    }*/
+  }, 3000);
 
   //Attempt at auto update
 
