@@ -4,6 +4,8 @@ $(document).ready(function(){
   var $followsFrame1 = $('#followsFrame1');
   var $followsFrame2 = $('#followsFrame2');
   var tweetIndex = 0;
+  //stores current filter setting
+  var currentFilter = '';
   //Clear tweetFrame and followsFrame just in case
   $tweetFrame.html('');
   $followsFrame1.html('');
@@ -53,11 +55,19 @@ $(document).ready(function(){
     $timestamp.appendTo($tweet);
     $tweet.prependTo($tweetFrame);
 
-    //decides whether to show slide or not
-    if(visual === false){
-      $tweet.show();
+    //if a filter isn't set, show everything
+    if(currentFilter === '') {
+      //decides whether to show slide or not
+      if(visual === false){
+        $tweet.show();
+      } else {
+        $tweet.slideDown('slow');
+      }
     } else {
-      $tweet.slideDown('slow');
+      //If a filter is set, only show it if it matches the filter
+      if(tweet.user === currentFilter) {
+        $tweet.slideDown('slow');
+      }
     }
   };
 
@@ -73,9 +83,10 @@ $(document).ready(function(){
   
   for(var i = 0; i < users.length; i++) {
     //access list of tweeters & create shortcun
-    var $folName = $('<div class="user button"></div>');
+    var $folName = $('<div class="user button" data-name=""></div>');
     $folName.addClass(users[i]);
     $folName.text('@' + users[i]);
+    $folName.data('name', users[i]);
     //add them to page
     if((i % 2) === 0) {
       //splits the followers into two columns
@@ -93,10 +104,24 @@ $(document).ready(function(){
   setInterval(updateTweets, 500, true);
 
   //Click handlers for buttons
-  //Click button
-  //Slide Down all tweets
-  //Slide Up all tweets from not selected
-  //Make focus class in case toggle for hiding?
-  //Make Hide Tweets rather than Filter Tweets?
+  $('.user').on('click', function() {
+    //Click button
+    if(currentFilter !== $(this).data('name')) {
+      //Slide Down all tweets
+      $('.tweet').slideUp('fast');
+      //Slide Up all tweets from not selected
+      for(var i = 0; i < users.length; i++) {
+        if($(this).data('name') === users[i]) {
+          $('#tweetFrame').find('.' + users[i]).slideDown('slow');
+        }
+      }
+      //Sets currentFilter so filter can't repeat
+      currentFilter = $(this).data('name');
+    } else {
+      $('.tweet').slideDown('fast');
+      currentFilter = '';
+    }
+  });
+
 });
 
