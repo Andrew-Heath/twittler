@@ -65,7 +65,7 @@ $(document).ready(function(){
   for(var i = 0; i < users.length; i++) {
     var $folName = $('<div class="user button"></div>');
     $folName.addClass(users[i]);
-    $folName.text(users[i]);
+    $folName.text('@' + users[i]);
     $folName.appendTo($followsFrame);
   }
   //access list of tweeters

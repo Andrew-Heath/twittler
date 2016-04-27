@@ -161,6 +161,12 @@ h1 {
 	margin-top: 0px
 }
 
+.timestamp {
+	margin-left: 18px;
+	font-size: 10px;
+	color: #555;
+}
+
 /*
 	==============================
 	Control Frame
@@ -169,17 +175,34 @@ h1 {
 
 .controls {
 	padding: 20px;
+	padding-left: 70px;
+}
+
+h3 {
+	padding-left: 15px;
+	font-size: 22px;
+}
+
+.user {
+	width: 50%;
+	text-align: center;
+	border: 2px solid #000;
+	border-radius: 15px;
+	padding: 10px;
+	margin: 5px 0;
+	background: -webkit-linear-gradient(to right, #FAEDFF, #d8f);
+	background: -moz-linear-gradient(to right, #FAEDFF, #d8f);
+	background: linear-gradient(to right, #FAEDFF, #d8f);
 }
 
 /*
 	==============================
-	Timestamp
+	Button Effects
 	==============================
 */
 
-.timestamp {
-	margin-left: 18px;
-	font-size: 10px;
-	color: #555;
+.tweet:hover,
+.user:hover {
+	border-color: #b0f;
+	background: #d8f;
 }
-
