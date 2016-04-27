@@ -2,8 +2,8 @@ $(document).ready(function(){
   //Set neccessary variables
   var $tweetFrame = $('#tweetFrame');
   var $followsFrame = $('#followsFrame');
-  var index = 0;
-  //Clear tweetFrame just in case
+  var tweetIndex = 0;
+  //Clear tweetFrame and followsFrame just in case
   $tweetFrame.html('');
   $followsFrame.html('');
 
@@ -54,13 +54,20 @@ $(document).ready(function(){
 
   //Function to update multiple tweets
   var updateTweets = function() {
-    while(index < streams.home.length) {
-      postTweet(index);
-      index++;
+    while(tweetIndex < streams.home.length) {
+      postTweet(tweetIndex);
+      tweetIndex++;
     }
   };
 
   //Populate list of followed tweeters
+  
+  for(var i = 0; i < users.length; i++) {
+    var $folName = $('<div class="user"></div>');
+    $folName.addClass(users[i]);
+    $folName.text(users[i]);
+    $folName.appendTo($followsFrame);
+  }
   //access list of tweeters
   //create jQuery shortcut
   //loop through list of follows and generate list
