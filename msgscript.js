@@ -1,9 +1,11 @@
 $(document).ready(function(){
   //Set neccessary variables
   var $tweetFrame = $('#tweetFrame');
+  var $followsFrame = $('#followsFrame');
   var index = 0;
   //Clear tweetFrame just in case
   $tweetFrame.html('');
+  $followsFrame.html('');
 
   //Function to create an organized timestamp, takes a Date obj and returns a string
   var orgTS = function(timestamp) {
@@ -59,6 +61,9 @@ $(document).ready(function(){
   };
 
   //Populate list of followed tweeters
+  //access list of tweeters
+  //create jQuery shortcut
+  //loop through list of follows and generate list
 
   //Generates original list of tweets
   updateTweets();
