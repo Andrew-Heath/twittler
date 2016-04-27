@@ -1,11 +1,13 @@
 $(document).ready(function(){
   //Set neccessary variables
   var $tweetFrame = $('#tweetFrame');
-  var $followsFrame = $('#followsFrame');
+  var $followsFrame1 = $('#followsFrame1');
+  var $followsFrame2 = $('#followsFrame2');
   var tweetIndex = 0;
   //Clear tweetFrame and followsFrame just in case
   $tweetFrame.html('');
-  $followsFrame.html('');
+  $followsFrame1.html('');
+  $followsFrame2.html('');
 
   //Function to create an organized timestamp, takes a Date obj and returns a string
   var orgTS = function(timestamp) {
@@ -43,19 +45,26 @@ $(document).ready(function(){
   };
 
   //Function to add tweets to the page
-  var postTweet = function(tweetNumber) {
+  var postTweet = function(tweetNumber, visual) {
     var tweet = streams.home[tweetNumber];
     var $tweet = $('<div class="tweet ' + tweet.user + '"></div>');
     var $timestamp = $('<div class="timestamp">Posted at: ' + orgTS(tweet.created_at) + '</div>')
     $tweet.text('@' + tweet.user + ': ' + tweet.message);
     $timestamp.appendTo($tweet);
     $tweet.prependTo($tweetFrame);
+
+    //decides whether to show slide or not
+    if(visual === false){
+      $tweet.show();
+    } else {
+      $tweet.slideDown('slow');
+    }
   };
 
   //Function to update multiple tweets
-  var updateTweets = function() {
+  var updateTweets = function(visual) {
     while(tweetIndex < streams.home.length) {
-      postTweet(tweetIndex);
+      postTweet(tweetIndex, visual);
       tweetIndex++;
     }
   };
@@ -63,20 +72,25 @@ $(document).ready(function(){
   //Populate list of followed tweeters
   
   for(var i = 0; i < users.length; i++) {
+    //access list of tweeters & create shortcun
     var $folName = $('<div class="user button"></div>');
     $folName.addClass(users[i]);
     $folName.text('@' + users[i]);
-    $folName.appendTo($followsFrame);
+    //add them to page
+    if((i % 2) === 0) {
+      //splits the followers into two columns
+      $folName.appendTo($followsFrame1);
+    } else {
+      $folName.appendTo($followsFrame2);
+    }
+    $folName.slideDown('slow');
   }
-  //access list of tweeters
-  //create jQuery shortcut
-  //loop through list of follows and generate list
 
-  //Generates original list of tweets
-  updateTweets();
+  //Generates original list of tweets, does not slide
+  updateTweets(false);
 
-  //Constantly update tweets every 5 seconds
-  setInterval(updateTweets, 5000);
+  //Constantly update tweets every half second, with slide
+  setInterval(updateTweets, 500, true);
 
   //Click handlers for buttons
   //Mouse Hover handlers for buttons

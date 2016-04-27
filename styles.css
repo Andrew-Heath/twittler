@@ -54,7 +54,7 @@ table {
 */
 
 body {
-	background: #f5f5f5;
+	background: #ddd;
 	font: 300 16px/18px "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
@@ -175,16 +175,14 @@ h1 {
 
 .controls {
 	padding: 20px;
-	padding-left: 70px;
 }
 
 h3 {
-	padding-left: 15px;
+	padding-left: 30px;
 	font-size: 22px;
 }
 
 .user {
-	width: 50%;
 	text-align: center;
 	border: 2px solid #000;
 	border-radius: 15px;
@@ -205,4 +203,9 @@ h3 {
 .user:hover {
 	border-color: #b0f;
 	background: #d8f;
+}
+
+.tweet,
+.user {
+	display: none;
 }
