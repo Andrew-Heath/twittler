@@ -93,7 +93,10 @@ $(document).ready(function(){
   setInterval(updateTweets, 500, true);
 
   //Click handlers for buttons
-  //Mouse Hover handlers for buttons
-  //Add more tweets handler (constant update prefered)
+  //Click button
+  //Slide Down all tweets
+  //Slide Up all tweets from not selected
+  //Make focus class in case toggle for hiding?
+  //Make Hide Tweets rather than Filter Tweets?
 });
 
