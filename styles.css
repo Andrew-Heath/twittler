@@ -123,7 +123,7 @@ body {
 */
 
 .primary-header {
-	/*height: 60px;*/
+	height: 100px;
 	background: -webkit-linear-gradient(to right, #d8f, #70a);
 	background: -moz-linear-gradient(to right, #d8f, #70a);
 	background: linear-gradient(to right, #d8f, #70a);
@@ -180,6 +180,7 @@ h1 {
 h3 {
 	padding-left: 30px;
 	font-size: 22px;
+	margin-bottom: 5px;
 }
 
 .user {
@@ -203,9 +204,4 @@ h3 {
 .user:hover {
 	border-color: #b0f;
 	background: #d8f;
-}
-
-.tweet,
-.user {
-	display: none;
 }

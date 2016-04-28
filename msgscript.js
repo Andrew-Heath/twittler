@@ -58,9 +58,10 @@ $(document).ready(function(){
     //if a filter isn't set, show everything
     if(currentFilter === '') {
       //decides whether to show slide or not
-      if(visual === false){
-        $tweet.show();
-      } else {
+      if(visual === true){
+        //$tweet.show();
+      //} else {
+        $tweet.hide();
         $tweet.slideDown('slow');
       }
     } else {
@@ -94,34 +95,32 @@ $(document).ready(function(){
     } else {
       $folName.appendTo($followsFrame2);
     }
-    $folName.slideDown('slow');
+    //$folName.slideDown('slow');
   }
+
+  //Click handlers for buttons
+$('.user').on('click', function() {
+  //Click button
+  if(currentFilter !== $(this).data('name')) {
+    //Slide Down all tweets
+    $('.tweet').slideUp('fast');
+    //Slide Up all tweets from not selected
+    for(var i = 0; i < users.length; i++) {
+      if($(this).data('name') === users[i]) {
+        $('#tweetFrame').find('.' + users[i]).slideDown('slow');
+      }
+    }
+    //Sets currentFilter so filter can't repeat
+    currentFilter = $(this).data('name');
+  } else {
+    $('.tweet').slideDown('fast');
+    currentFilter = '';
+  }
+});
 
   //Generates original list of tweets, does not slide
   updateTweets(false);
 
   //Constantly update tweets every half second, with slide
   setInterval(updateTweets, 500, true);
-
-  //Click handlers for buttons
-  $('.user').on('click', function() {
-    //Click button
-    if(currentFilter !== $(this).data('name')) {
-      //Slide Down all tweets
-      $('.tweet').slideUp('fast');
-      //Slide Up all tweets from not selected
-      for(var i = 0; i < users.length; i++) {
-        if($(this).data('name') === users[i]) {
-          $('#tweetFrame').find('.' + users[i]).slideDown('slow');
-        }
-      }
-      //Sets currentFilter so filter can't repeat
-      currentFilter = $(this).data('name');
-    } else {
-      $('.tweet').slideDown('fast');
-      currentFilter = '';
-    }
-  });
-
 });
-
