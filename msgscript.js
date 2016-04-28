@@ -149,4 +149,23 @@ $(document).ready(function(){
       currentFilter = '';
     }
   });
+
+  //Click handler for opening Write own Post
+  //Possibly change this all to open on clicking the frame,
+  //then having a 'Post' and 'Cancel' button, the latter of
+  //which would clear data and close the frame.
+  $('.post-frame').on('click', 'a', function() {
+    event.preventDefault();
+    //Toggle whether text boxes are shown or not
+    $('.post-group').slideToggle('slow');
+    //clear data
+    $('.post-group').find('input').val('');
+    $('.post-group').find('textarea').val('');
+    //change anchor text to Show/Hide as required
+    if($(this).text() === 'Show') {
+      $(this).text('Hide');
+    } else {
+      $(this).text('Show');
+    }
+  });
 });

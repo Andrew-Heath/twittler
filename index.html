@@ -26,9 +26,20 @@
       <h3>You are following:</h3>
       <div id="followsFrame1" class="col-1-2"></div><!--
       --><div id="followsFrame2" class="col-1-2"></div>
-      <form class="custom tile" action="#" method="post">Write a Tweet here!
-        <fieldset class="post-group"></fieldset>
-      </form>      
+      <form class="post-frame tile" action="#" method="post"><div>Write Tweet</div>
+        <fieldset class="post-group">
+          <label>
+            Username
+            <input type="text" name="username" placeholder="Username" required>
+          </label>
+          <br>
+          <label>
+            Message
+            <textarea name="tweet" required></textarea>
+          </label>
+        </fieldset>
+        <div class="show-hide"><a href="#">Show</a></div>
+      </form>
     </section>
 
   </body>

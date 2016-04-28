@@ -186,14 +186,56 @@ h3 {
 	margin-bottom: 5px;
 }
 
-/*
-	==============================
-	Button Effects
-	==============================
-*/
-
 .tweet:hover,
 .user:hover {
 	border-color: #b0f;
 	background: #d8f;
+}
+
+/*
+	==============================
+	New Tweet Control
+	==============================
+*/
+
+form {
+	margin: 20px 15%;
+}
+
+.post-frame {
+	text-align: center;
+}
+
+.post-group {
+	margin: 10px;
+	text-align: left;
+	display: none;
+}
+
+.post-group input,
+.post-group textarea {
+	display: block;
+}
+
+.post-group label {
+	margin-left: 10px;
+}
+
+.post-group textarea {
+	width: 100%;
+	margin-bottom: 5px;
+}
+
+.show-hide {
+	font-size: 10px;
+	display: inline;
+	text-align: right;
+	float: right;
+	position: relative;
+	top: -10px;
+}
+
+.show-hide a,
+.show-hide a:visited {
+	color: #000;
 }
