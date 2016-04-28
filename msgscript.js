@@ -1,11 +1,16 @@
+var tweetIndex = 0;
+var usersIndex = 0;
+var currentFilter = '';
+
 $(document).ready(function(){
   //Set neccessary variables
   var $tweetFrame = $('#tweetFrame');
   var $followsFrame1 = $('#followsFrame1');
   var $followsFrame2 = $('#followsFrame2');
-  var tweetIndex = 0;
+  //var tweetIndex = 0;
+  //var usersIndex = 0;
   //stores current filter setting
-  var currentFilter = '';
+  //var currentFilter = '';
   //Clear tweetFrame and followsFrame just in case
   $tweetFrame.html('');
   $followsFrame1.html('');
@@ -56,7 +61,7 @@ $(document).ready(function(){
     $tweet.prependTo($tweetFrame);
 
     //first check if visuals are wanted
-    if(visual === true){
+    if(visual){
       //hide tweet for filter purposes
       $tweet.hide();
       if(currentFilter === '' || tweet.user === currentFilter){
@@ -73,6 +78,29 @@ $(document).ready(function(){
     }
   };
 
+  var postUser = function(visual) {
+    //access list of tweeters & create shortcun
+    var $folName = $('<div class="user tile" data-name=""></div>');
+    //add a Class of the user name for filter purposes
+    $folName.addClass(users[usersIndex]);
+    //set the name properly
+    $folName.text('@' + users[usersIndex]);
+    //add data property for filter purpose
+    $folName.data('name', users[usersIndex]);
+    //add them to page
+    if((usersIndex % 2) === 0) {
+      //splits the followers into two columns
+      $folName.appendTo($followsFrame1);
+    } else {
+      $folName.appendTo($followsFrame2);
+    }
+    //decide if to show automatically or use slide effect
+    if(visual) {
+      $folName.hide();
+      $folName.slideDown();
+    }
+  };
+
   //Function to update multiple tweets
   var updateTweets = function(visual) {
     while(tweetIndex < streams.home.length) {
@@ -82,46 +110,43 @@ $(document).ready(function(){
   };
 
   //Populate list of followed tweeters
-  
-  for(var i = 0; i < users.length; i++) {
-    //access list of tweeters & create shortcun
-    var $folName = $('<div class="user tile" data-name=""></div>');
-    $folName.addClass(users[i]);
-    $folName.text('@' + users[i]);
-    $folName.data('name', users[i]);
-    //add them to page
-    if((i % 2) === 0) {
-      //splits the followers into two columns
-      $folName.appendTo($followsFrame1);
-    } else {
-      $folName.appendTo($followsFrame2);
+  var updateUsers = function(visual) {
+    while(usersIndex < users.length) {
+      postUser(visual);
+      usersIndex++;
     }
-    //$folName.slideDown('slow');
-  }
+  };
 
-  //Click handlers for buttons
-$('.user').on('click', function() {
-  //Click button
-  if(currentFilter !== $(this).data('name')) {
-    //Slide Up all tweets
-    $('.tweet').slideUp('fast');
-    //Slide Down all tweets from not selected
-    for(var i = 0; i < users.length; i++) {
-      if($(this).data('name') === users[i]) {
-        $('#tweetFrame').find('.' + users[i]).slideDown('slow');
-      }
-    }
-    //Sets currentFilter so filter can't repeat
-    currentFilter = $(this).data('name');
-  } else {
-    $('.tweet').slideDown('fast');
-    currentFilter = '';
-  }
-});
+  //Wrapper to handle both updates
+  var updatePage = function(visual) {
+    updateTweets(visual);
+    updateUsers(visual);
+  };
 
   //Generates original list of tweets, does not slide
-  updateTweets(false);
+  updatePage(false);
 
   //Constantly update tweets every half second, with slide
-  setInterval(updateTweets, 500, true);
+  setInterval(updatePage, 1000, true);
+
+  //Click handlers for buttons
+  $('.user').on('click', function() {
+    //Click button
+    if(currentFilter !== $(this).data('name')) {
+      //checks to see if filter is currently set to the selected user
+      //Slide Up all tweets
+      $('.tweet').slideUp('fast');
+      //Slide Down all tweets belonging to selected user
+      for(var i = 0; i < users.length; i++) {
+        if($(this).data('name') === users[i]) {
+          $('#tweetFrame').find('.' + users[i]).slideDown('slow');
+        }
+      }
+      //Sets currentFilter so filter can't repeat
+      currentFilter = $(this).data('name');
+    } else {
+      $('.tweet').slideDown('fast');
+      currentFilter = '';
+    }
+  });
 });
