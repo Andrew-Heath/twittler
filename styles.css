@@ -139,7 +139,7 @@ h1 {
 
 /*
 	==============================
-	Tweet Frame
+	Tweet & Control Frames
 	==============================
 */
 
@@ -147,14 +147,23 @@ h1 {
 	padding: 20px;
 }
 
-.tweet {
-	margin-top: 10px;
+.tile {
 	border: 2px solid #000;
 	border-radius: 15px;
 	padding: 10px;
 	background: -webkit-linear-gradient(to right, #FAEDFF, #d8f);
 	background: -moz-linear-gradient(to right, #FAEDFF, #d8f);
 	background: linear-gradient(to right, #FAEDFF, #d8f);
+}
+
+.tweet {
+	margin-top: 10px;
+	
+}
+
+.user {
+	text-align: center;
+	margin: 5px 0;
 }
 
 .tweet:first-child {
@@ -167,12 +176,6 @@ h1 {
 	color: #555;
 }
 
-/*
-	==============================
-	Control Frame
-	==============================
-*/
-
 .controls {
 	padding: 20px;
 }
@@ -181,17 +184,6 @@ h3 {
 	padding-left: 30px;
 	font-size: 22px;
 	margin-bottom: 5px;
-}
-
-.user {
-	text-align: center;
-	border: 2px solid #000;
-	border-radius: 15px;
-	padding: 10px;
-	margin: 5px 0;
-	background: -webkit-linear-gradient(to right, #FAEDFF, #d8f);
-	background: -moz-linear-gradient(to right, #FAEDFF, #d8f);
-	background: linear-gradient(to right, #FAEDFF, #d8f);
 }
 
 /*

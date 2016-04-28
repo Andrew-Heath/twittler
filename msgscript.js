@@ -49,25 +49,26 @@ $(document).ready(function(){
   //Function to add tweets to the page
   var postTweet = function(tweetNumber, visual) {
     var tweet = streams.home[tweetNumber];
-    var $tweet = $('<div class="tweet ' + tweet.user + '"></div>');
+    var $tweet = $('<div class="tweet tile ' + tweet.user + '"></div>');
     var $timestamp = $('<div class="timestamp">Posted at: ' + orgTS(tweet.created_at) + '</div>')
     $tweet.text('@' + tweet.user + ': ' + tweet.message);
     $timestamp.appendTo($tweet);
     $tweet.prependTo($tweetFrame);
 
-    //if a filter isn't set, show everything
-    if(currentFilter === '') {
-      //decides whether to show slide or not
-      if(visual === true){
-        //$tweet.show();
-      //} else {
-        $tweet.hide();
+    //first check if visuals are wanted
+    if(visual === true){
+      //hide tweet for filter purposes
+      $tweet.hide();
+      if(currentFilter === '' || tweet.user === currentFilter){
+        //if no filter is set or user matches filter, show it
         $tweet.slideDown('slow');
       }
     } else {
-      //If a filter is set, only show it if it matches the filter
-      if(tweet.user === currentFilter) {
-        $tweet.slideDown('slow');
+      //hide tweet for filter purposes
+      $tweet.hide();
+      if(currentFilter === '' || tweet.user === currentFilter){
+        //if no filter is set or user matches filter, show it
+        $tweet.show();
       }
     }
   };
@@ -84,7 +85,7 @@ $(document).ready(function(){
   
   for(var i = 0; i < users.length; i++) {
     //access list of tweeters & create shortcun
-    var $folName = $('<div class="user button" data-name=""></div>');
+    var $folName = $('<div class="user tile" data-name=""></div>');
     $folName.addClass(users[i]);
     $folName.text('@' + users[i]);
     $folName.data('name', users[i]);
@@ -102,9 +103,9 @@ $(document).ready(function(){
 $('.user').on('click', function() {
   //Click button
   if(currentFilter !== $(this).data('name')) {
-    //Slide Down all tweets
+    //Slide Up all tweets
     $('.tweet').slideUp('fast');
-    //Slide Up all tweets from not selected
+    //Slide Down all tweets from not selected
     for(var i = 0; i < users.length; i++) {
       if($(this).data('name') === users[i]) {
         $('#tweetFrame').find('.' + users[i]).slideDown('slow');
