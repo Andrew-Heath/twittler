@@ -155,9 +155,8 @@ $(document).ready(function(){
   $(document).on('click', '.closed', function() {
     //Toggle whether text boxes are shown or not
     $('.post-group').slideDown('slow');
-    //set username to visitor and clear tweet box
-    $('.post-group').find('.vis-name').val(visitor);
-    $('.post-group').find('new-tweet').val('');
+    //clear tweet box
+    $('.post-group').find('.new-tweet').val('');
     //remove closed class to keep it from reopening on other clicks
     $(this).removeClass('closed');
   });
@@ -166,8 +165,12 @@ $(document).ready(function(){
   $('.clear-frame').on('click', function() {
     //Clear visitor, username, and text area
     visitor = '';
-    $('.post-group').find('.vis-name').val('');
-    $('.post-group').find('.new-tweet').val('');
+    $('.vis-name').val('');
+    $('.new-tweet').val('');
+  });
+
+  //Click Handler for Close button
+  $('.close-frame').on('click', function() {
     //slideUp the form
     $('.post-group').slideUp('slow', function(){
       //readd closed class to make frame function again
@@ -178,18 +181,19 @@ $(document).ready(function(){
 
   //Click handler for Post button
   $('.post-tweet').on('click', function() {
-    //save message
-    visitor = $('.vis-name').val();
-    var newTweet = $('.new-tweet').val();
-    //clear text frame
-    $('.post-group').find('textarea').val('');
-    //use data_generator function to post tweet
-    writeTweet(newTweet);
-    //slideUp the form
-    $('.post-group').slideUp('slow', function(){
-      //readd closed class to make frame function again
-      //makes sure to wait till the animation ends so it doesn't reopen
-      $('.post-frame').addClass('closed');
-    });
+    event.preventDefault();
+    if($('.new-tweet').val() !== '') {
+      //save message
+      visitor = $('.vis-name').val();
+      var newTweet = $('.new-tweet').val();
+      //use data_generator function to post tweet
+      writeTweet(newTweet);
+      //slideUp the form
+      $('.post-group').slideUp('slow', function(){
+        //readd closed class to make frame function again
+        //makes sure to wait till the animation ends so it doesn't reopen
+        $('.post-frame').addClass('closed');
+      });
+    }
   });
 });
