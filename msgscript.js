@@ -1,6 +1,7 @@
 var tweetIndex = 0;
 var usersIndex = 0;
 var currentFilter = '';
+var visitor = '';
 
 $(document).ready(function(){
   //Set neccessary variables
@@ -151,21 +152,44 @@ $(document).ready(function(){
   });
 
   //Click handler for opening Write own Post
-  //Possibly change this all to open on clicking the frame,
-  //then having a 'Post' and 'Cancel' button, the latter of
-  //which would clear data and close the frame.
-  $('.post-frame').on('click', 'a', function() {
-    event.preventDefault();
+  $(document).on('click', '.closed', function() {
     //Toggle whether text boxes are shown or not
-    $('.post-group').slideToggle('slow');
-    //clear data
-    $('.post-group').find('input').val('');
+    $('.post-group').slideDown('slow');
+    //set username to visitor and clear tweet box
+    $('.post-group').find('.vis-name').val(visitor);
+    $('.post-group').find('new-tweet').val('');
+    //remove closed class to keep it from reopening on other clicks
+    $(this).removeClass('closed');
+  });
+
+  //Click handler for Clear button
+  $('.clear-frame').on('click', function() {
+    //Clear visitor, username, and text area
+    visitor = '';
+    $('.post-group').find('.vis-name').val('');
+    $('.post-group').find('.new-tweet').val('');
+    //slideUp the form
+    $('.post-group').slideUp('slow', function(){
+      //readd closed class to make frame function again
+      //makes sure to wait till the animation ends so it doesn't reopen
+      $('.post-frame').addClass('closed');
+    });
+  });
+
+  //Click handler for Post button
+  $('.post-tweet').on('click', function() {
+    //save message
+    visitor = $('.vis-name').val();
+    var newTweet = $('.new-tweet').val();
+    //clear text frame
     $('.post-group').find('textarea').val('');
-    //change anchor text to Show/Hide as required
-    if($(this).text() === 'Show') {
-      $(this).text('Hide');
-    } else {
-      $(this).text('Show');
-    }
+    //use data_generator function to post tweet
+    writeTweet(newTweet);
+    //slideUp the form
+    $('.post-group').slideUp('slow', function(){
+      //readd closed class to make frame function again
+      //makes sure to wait till the animation ends so it doesn't reopen
+      $('.post-frame').addClass('closed');
+    });
   });
 });

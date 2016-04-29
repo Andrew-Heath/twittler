@@ -16,8 +16,8 @@ window.users = Object.keys(streams.users);
 // utility function for adding tweets to our data structures
 var addTweet = function(newTweet){
   var username = newTweet.user;
-  streams.users[username].push(newTweet);
   streams.home.push(newTweet);
+  streams.users[username].push(newTweet);
 };
 
 // utility function
@@ -65,5 +65,24 @@ var writeTweet = function(message){
   var tweet = {};
   tweet.user = visitor;
   tweet.message = message;
-  addTweet(tweet);
+  /*
+    I removed the call to addTweet as it would throw an error
+    It would try to add the tweet to the 'visitor's hub of tweets,
+    but the visitor was not properly added as a user.  If they are,
+    the random tweet generation would then generate random tweets
+    for this visitor user as well, which I believe is not intended.
+    To fix this, either this function needs to add the visitor to
+    the list of users, in which case random tweets will be generated
+    for said user, or the random generator needs to be hard-coded to
+    limit the random user to just the first four, as they are the
+    ones hard-coded into the program.
+
+    Alternatively, this is some strange case that when the 2nd line
+    of addTweet resolves as an error, it doesn't finish the rest of
+    the function.
+  */
+  //Also, adding a date to the tweet was skipped
+  tweet.created_at = new Date();
+  streams.home.push(tweet);
+  //addTweet(tweet);
 };

@@ -212,30 +212,16 @@ form {
 	display: none;
 }
 
-.post-group input,
+.post-group .vis-name,
 .post-group textarea {
 	display: block;
 }
 
 .post-group label {
-	margin-left: 10px;
+	margin-bottom: 2px;
 }
 
 .post-group textarea {
 	width: 100%;
 	margin-bottom: 5px;
-}
-
-.show-hide {
-	font-size: 10px;
-	display: inline;
-	text-align: right;
-	float: right;
-	position: relative;
-	top: -10px;
-}
-
-.show-hide a,
-.show-hide a:visited {
-	color: #000;
 }
