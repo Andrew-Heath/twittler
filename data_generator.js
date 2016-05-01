@@ -16,22 +16,8 @@ window.users = Object.keys(streams.users);
 // utility function for adding tweets to our data structures
 var addTweet = function(newTweet){
   var username = newTweet.user;
-  /*
-    These two lines of code were swapped around.  Originally written,
-    when running writeTweet, the code would try to push to a user that
-    didn't exist, returning an error and canceling the entire addTweet
-    function.  This way, the code will still throw an error, but the
-    rest of the function will still function normally and continue on.
-
-    Alternatively (as seen in previous iterations of this code), I
-    moved the home.push into the writeTweet function and didn't call
-    addTweet at all.
-
-    The problem with adding the visitor to the list of users is that
-    the generateRandomTweet function would then start to create random
-    tweets from the visitor's username.*/
-  streams.home.push(newTweet);
   streams.users[username].push(newTweet);
+  streams.home.push(newTweet);
 };
 
 // utility function
@@ -81,5 +67,16 @@ var writeTweet = function(message){
   tweet.message = message;
   //Adding a date to the tweet was skipped, so it is done here
   tweet.created_at = new Date();
-  addTweet(tweet);
+  /*
+    The call to addTweet has been removed and replaced with home.push
+    Originally written, when running writeTweet, the code would try
+    to push to a user that didn't exist, returning an error and
+    canceling the entire addTweet function.  This way, the code will
+    not throw an error and still add the tweet to the stack.
+
+    The problem with adding the visitor to the list of users is that
+    the generateRandomTweet function would then start to create random
+    tweets from the visitor's username.
+  */
+  streams.home.push(tweet); //addTweet(tweet);
 };
