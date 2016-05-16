@@ -8,10 +8,6 @@ $(document).ready(function(){
   var $tweetFrame = $('#tweetFrame');
   var $followsFrame1 = $('#followsFrame1');
   var $followsFrame2 = $('#followsFrame2');
-  //var tweetIndex = 0;
-  //var usersIndex = 0;
-  //stores current filter setting
-  //var currentFilter = '';
   //Clear tweetFrame and followsFrame just in case
   $tweetFrame.html('');
   $followsFrame1.html('');
@@ -80,7 +76,7 @@ $(document).ready(function(){
   };
 
   var postUser = function(visual) {
-    //access list of tweeters & create shortcun
+    //access list of tweeters & create shortcut
     var $folName = $('<div class="user tile" data-name=""></div>');
     //add a Class of the user name for filter purposes
     $folName.addClass(users[usersIndex]);
